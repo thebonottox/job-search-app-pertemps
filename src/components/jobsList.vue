@@ -9,7 +9,7 @@
   </div>
   <div class="flex flex-col">
     <div class="bg-gray-100 py-8">
-      <ul class="max-w-md mx-auto">
+     <ul class="max-w-md mx-auto">
         <li
           v-for="(job, index) in jobs"
           :key="index"
