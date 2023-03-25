@@ -8,9 +8,9 @@
   <div class="flex flex-col items-center h-screen">
     <div class="bg-gray-100 p-8 w-2/3 mx-auto mt-8 rounded">
       <h2 class="text-xl font-bold mb-2">{{ job.job_title }}</h2>
-      <p>ID: {{ job.id }}</p>
+      <p class="text-gray-700">ID: {{ job.id }}</p>
       <p class="text-gray-700">{{ job.location }}</p>
-      <p class="text-gray-600 mb-2">
+      <p class="text-gray-700 mb-2">
         £{{ job.salary_from }} - £{{ job.salary_to }}
       </p>
       <p class="text-gray-500 text-md">Posted on {{ job.posted_date }}</p>
