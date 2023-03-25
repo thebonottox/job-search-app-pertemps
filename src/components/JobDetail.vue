@@ -22,6 +22,7 @@
 
     <button
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-2/4 mt-6 mx-auto"
+      @click="submitApplication"
     >
       Apply
     </button>
@@ -49,5 +50,18 @@ export default {
   created() {
     this.job = jobData.jobs.find((job) => job.id === this.id);
   },
+  //
+   mounted() {
+      const applyButton = document.querySelector('.apply-button');
+      if (applyButton) {
+      applyButton.addEventListener('click', this.submitApplication);
+      }
+    },
+    methods: {
+      submitApplication() {
+        alert("Your application was sent!");
+      }
+    }
+    //
 };
 </script>
