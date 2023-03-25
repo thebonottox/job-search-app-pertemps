@@ -6,7 +6,7 @@
     </div>
 </div>
   <div class="flex flex-col items-center h-screen">
-    <div class="bg-gray-100 p-8 w-2/3 mx-auto mt-8 rounded">
+    <div class="bg-gray-100 p-8 w-2/3 mx-auto mt-8 rounded-lg shadow-xl">
       <h2 class="text-xl font-bold mb-2">{{ job.job_title }}</h2>
       <p class="text-gray-700">ID: {{ job.id }}</p>
       <p class="text-gray-700">{{ job.location }}</p>
@@ -15,13 +15,13 @@
       </p>
       <p class="text-gray-500 text-md">Posted on {{ job.posted_date }}</p>
     </div>
-    <section class="bg-gray-100 p-8 w-2/3 mx-auto mt-6 rounded">
+    <section class="bg-gray-100 p-8 w-2/3 mx-auto mt-6 rounded-lg shadow-xl">
       <h3 class="text-xl font-bold mb-2">Job Details</h3>
       <p>{{ job.job_description }}</p>
     </section>
 
     <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-2/4 mt-6 mx-auto"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl w-2/4 mt-6 mx-auto"
       @click="submitApplication"
     >
       Apply
