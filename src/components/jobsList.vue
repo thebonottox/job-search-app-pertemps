@@ -2,16 +2,20 @@
   <div class="w-full h-64">
     <img :src="forest" alt="forest" class="w-full h-full object-cover" />
     <div
-      class="absolute top-0 left-0 w-full h-64 flex items-center justify-center"
+      class="flex flex-col absolute top-0 left-0 w-full h-64 flex items-center justify-center"
     >
       <h1 class="text-white text-4xl font-bold">Job Search</h1>
+      <div class="w-2/4">
+      <input class="mt-8 rounded-md px-2 w-10/12 h-10" type="text" v-model="searchTerm" placeholder="Search by job title">
+      <button class="bg-blue-300 text-slate-50 font-bold rounded-lg p-2 mx-2">Search</button>
+      </div>
     </div>
   </div>
   <div class="flex flex-col">
     <div class="bg-gray-100 py-8">
      <ul class="max-w-xl mx-auto">
         <li
-          v-for="(job, index) in jobs"
+          v-for="(job, index) in filteredJobs"
           :key="index"
           class="bg-white shadow-xl mb-4 p-6 rounded-xl"
         >
@@ -60,7 +64,15 @@ export default {
     return {
       jobs: jobData.jobs,
       forest: myImage,
+      searchTerm: "",
     };
+  },
+  computed: {
+    filteredJobs() {
+      return this.jobs.filter(job =>
+        job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    },
   },
 };
 </script>
