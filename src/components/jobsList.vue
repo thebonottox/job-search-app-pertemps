@@ -1,5 +1,10 @@
 <template>
-<h1 class="text-xl font-bold mb-2">Job Search</h1>
+<div class="w-full h-64">
+<img :src="forest" alt="forest" class="w-full h-full object-cover" />
+<div class="absolute top-0 left-0 w-full h-64 flex items-center justify-center">
+      <h1 class="text-white text-4xl font-bold">Job Search</h1>
+    </div>
+</div>
   <div class="bg-gray-100 py-8">
     <ul class="max-w-md mx-auto">
       <li
@@ -25,7 +30,7 @@
 
 <script>
 import jobData from "../data/jobs_with_ids";
-
+import myImage from '../assets/forest.jpg'
 
 export default {
   name: "JobList",
@@ -33,6 +38,7 @@ export default {
   data() {
     return {
       jobs: jobData.jobs,
+      forest: myImage,
     };
   },
 };

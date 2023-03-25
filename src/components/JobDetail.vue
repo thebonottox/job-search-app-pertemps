@@ -1,4 +1,10 @@
 <template>
+<div class="w-full h-64">
+<img :src="forest" alt="forest" class="w-full h-full object-cover" />
+<div class="absolute top-0 left-0 w-full h-64 flex items-center justify-center">
+      <h1 class="text-white text-4xl font-bold">Job Details</h1>
+    </div>
+</div>
   <div class="flex flex-col items-center h-screen">
     <div class="bg-gray-100 p-8 w-2/3 mx-auto mt-8 rounded">
       <h2 class="text-xl font-bold mb-2">{{ job.job_title }}</h2>
@@ -24,6 +30,7 @@
 
 <script>
 import jobData from "../data/jobs_with_ids";
+import myImage from '../assets/forest.jpg'
 
 export default {
   name: "JobDetail",
@@ -36,6 +43,7 @@ export default {
   data() {
     return {
       job: {},
+      forest: myImage,
     };
   },
   created() {
