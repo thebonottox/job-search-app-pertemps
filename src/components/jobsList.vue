@@ -33,42 +33,100 @@
     </select>
   </div>
   <div class="flex flex-col">
-    <div class="bg-slate-50 py-8">
-      <ul class="max-w-xl mx-auto">
-        <li
-          v-for="(job, index) in filteredJobs"
-          :key="index"
-          class="bg-white shadow-xl mb-4 p-6 rounded-xl"
+    <div class="bg-slate-50 py-8 flex">
+      <div class="w-4/12 flex justify-end">
+        <div
+          class="bg-slate-200 w-48 h-72 rounded-xl shadow-lg flex flex-col items-center text-gray-700"
         >
-          <h2 class="text-xl font-bold mb-2">
-            <router-link :to="{ name: 'JobDetail', params: { id: job.id } }">{{
-              job.job_title
-            }}</router-link>
-          </h2>
-          <p class="text-gray-700">ID: {{ job.id }}</p>
-          <p class="text-gray-700">{{ job.location }}</p>
-          <p class="text-gray-700">
-            £{{ job.salary_from }} - £{{ job.salary_to }}
+          <p class="text-gray-700 p-3">
+            <span class="text-blue-400 font-bold">{{
+              searchResults.length
+            }}</span>
+            Jobs Found
           </p>
           <button
-            class="text-sm text-blue-400 border border-blue-400 rounded-lg px-2 mt-2"
+            @click="selectedCategories = []"
+            class="bg-blue-200 rounded-lg text-gray-700 p-1 mb-2"
           >
-            {{ job.category }}
+            Reset Filter
           </button>
-          <p class="text-gray-500 text-sm mt-4">
-            Posted on {{ job.posted_date }}
-          </p>
-          <div class="text-center">
-            <button
-              class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-1 px-4 w-5/6 mt-6 mx-auto rounded-xl"
-            >
-              <router-link :to="{ name: 'JobDetail', params: { id: job.id } }"
-                >View</router-link
-              >
-            </button>
+          <div class="flex flex-col p-1">
+           <label>
+  <input type="checkbox" v-model="selectedCategories" value="Education" />
+  Education
+  <span class="checkmark"></span>
+</label>
+<label>
+  <input type="checkbox" v-model="selectedCategories" value="Engineering" />
+  Engineering
+  <span class="checkmark"></span>
+</label>
+<label>
+  <input type="checkbox" v-model="selectedCategories" value="Finance" />
+  Finance
+  <span class="checkmark"></span>
+</label>
+<label>
+  <input type="checkbox" v-model="selectedCategories" value="HR" />
+  HR
+  <span class="checkmark"></span>
+</label>
+<label>
+  <input type="checkbox" v-model="selectedCategories" value="Insurance" />
+  Insurance
+  <span class="checkmark"></span>
+</label>
+<label>
+  <input type="checkbox" v-model="selectedCategories" value="IT" />
+  IT
+  <span class="checkmark"></span>
+</label>
+<label>
+  <input type="checkbox" v-model="selectedCategories" value="Warehouse" />
+  Warehouse
+  <span class="checkmark"></span>
+</label>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div class="ml-4 w-8/12">
+        <ul class="max-w-lg">
+          <li
+            v-for="(job, index) in filteredJobs"
+            :key="index"
+            class="bg-white shadow-xl mb-4 p-6 rounded-xl"
+          >
+            <h2 class="text-xl font-bold mb-2">
+              <router-link
+                :to="{ name: 'JobDetail', params: { id: job.id } }"
+                >{{ job.job_title }}</router-link
+              >
+            </h2>
+            <p class="text-gray-700">ID: {{ job.id }}</p>
+            <p class="text-gray-700">{{ job.location }}</p>
+            <p class="text-gray-700">
+              £{{ job.salary_from }} - £{{ job.salary_to }}
+            </p>
+            <button
+              class="text-sm text-blue-400 border border-blue-400 rounded-lg px-2 mt-2"
+            >
+              {{ job.category }}
+            </button>
+            <p class="text-gray-500 text-sm mt-4">
+              Posted on {{ job.posted_date }}
+            </p>
+            <div class="text-center">
+              <button
+                class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-1 px-4 w-5/6 mt-6 mx-auto rounded-xl"
+              >
+                <router-link :to="{ name: 'JobDetail', params: { id: job.id } }"
+                  >View</router-link
+                >
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -87,6 +145,7 @@ export default {
       searchTerm: "",
       searchResults: jobData.jobs,
       sortType: "default",
+      selectedCategories: [],
     };
   },
 
@@ -95,6 +154,9 @@ export default {
       this.updateSearchResults();
     },
     sortType: function (newSortType, oldSortType) {
+      this.updateSearchResults();
+    },
+    selectedCategories: function (newCategories, oldCategories) {
       this.updateSearchResults();
     },
   },
@@ -111,6 +173,11 @@ export default {
       } else if (this.sortType === "salary") {
         this.searchResults.sort(
           (a, b) => b.salary_from + b.salary_to - (a.salary_from + a.salary_to)
+        );
+      }
+      if (this.selectedCategories.length > 0) {
+        this.searchResults = this.searchResults.filter((job) =>
+          this.selectedCategories.includes(job.category)
         );
       }
       return this.searchResults;
