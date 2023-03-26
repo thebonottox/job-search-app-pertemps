@@ -6,14 +6,24 @@
     >
       <h1 class="text-white text-4xl font-bold">Job Search</h1>
       <div class="w-2/4">
-      <input class="mt-8 rounded-md px-2 w-10/12 h-10" type="text" v-model="searchTerm" placeholder="Search by job title">
-      <button class="bg-blue-300 text-slate-50 font-bold rounded-lg p-2 mx-2">Search</button>
+        <input
+          class="mt-8 rounded-md px-2 w-10/12 h-10"
+          type="text"
+          v-model="searchTerm"
+          placeholder="Search by job title"
+        />
+        <button
+          @click="performSearch"
+          class="bg-blue-300 text-slate-50 font-bold rounded-lg p-2 mx-2"
+        >
+          Search
+        </button>
       </div>
     </div>
   </div>
   <div class="flex flex-col">
     <div class="bg-gray-100 py-8">
-     <ul class="max-w-xl mx-auto">
+      <ul class="max-w-xl mx-auto">
         <li
           v-for="(job, index) in filteredJobs"
           :key="index"
@@ -41,8 +51,7 @@
             <button
               class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-1 px-4 w-5/6 mt-6 mx-auto rounded-xl"
             >
-              <router-link
-                :to="{ name: 'JobDetail', params: { id: job.id } }"
+              <router-link :to="{ name: 'JobDetail', params: { id: job.id } }"
                 >View</router-link
               >
             </button>
@@ -65,13 +74,29 @@ export default {
       jobs: jobData.jobs,
       forest: myImage,
       searchTerm: "",
+      searchResults: jobData.jobs,
     };
+  },
+
+watch: {
+    searchTerm: function(newSearchTerm, oldSearchTerm) {
+        this.updateSearchResults();
+    }
+},
+
+  methods: {
+    updateSearchResults() {
+      this.searchResults = this.jobs.filter((job) =>
+        job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    },
+    performSearch() {
+      this.updateSearchResults();
+    },
   },
   computed: {
     filteredJobs() {
-      return this.jobs.filter(job =>
-        job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
+      return this.searchResults;
     },
   },
 };
