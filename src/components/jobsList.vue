@@ -21,8 +21,19 @@
       </div>
     </div>
   </div>
+  <div class="flex items-center justify-end w-full pb-2 px-2 bg-slate-50">
+    <p class="text-gray-600 p-2">Sort by:</p>
+    <select
+      class="mt-2 rounded-md px-2 w-3/10 h-10 text-gray-600 mr-4 bg-blue-100 shadow-md"
+      v-model="sortType"
+    >
+      <option value="default">Default</option>
+      <option value="date">Most Recent</option>
+      <option value="salary">Salary (High to Low)</option>
+    </select>
+  </div>
   <div class="flex flex-col">
-    <div class="bg-gray-100 py-8">
+    <div class="bg-slate-50 py-8">
       <ul class="max-w-xl mx-auto">
         <li
           v-for="(job, index) in filteredJobs"
@@ -75,20 +86,34 @@ export default {
       forest: myImage,
       searchTerm: "",
       searchResults: jobData.jobs,
+      sortType: "default",
     };
   },
 
-watch: {
-    searchTerm: function(newSearchTerm, oldSearchTerm) {
-        this.updateSearchResults();
-    }
-},
+  watch: {
+    searchTerm: function (newSearchTerm, oldSearchTerm) {
+      this.updateSearchResults();
+    },
+    sortType: function (newSortType, oldSortType) {
+      this.updateSearchResults();
+    },
+  },
 
   methods: {
     updateSearchResults() {
       this.searchResults = this.jobs.filter((job) =>
         job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
+      if (this.sortType === "date") {
+        this.searchResults.sort(
+          (a, b) => new Date(b.posted_date) - new Date(a.posted_date)
+        );
+      } else if (this.sortType === "salary") {
+        this.searchResults.sort(
+          (a, b) => b.salary_from + b.salary_to - (a.salary_from + a.salary_to)
+        );
+      }
+      return this.searchResults;
     },
     performSearch() {
       this.updateSearchResults();
