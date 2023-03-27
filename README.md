@@ -3,7 +3,7 @@
 This is a job search website built with Vue.js and Tailwind. The purpose of this app is to allow users to search and browse through job listings, filter jobs by category, and view job details. This file provides instructions for running the code locally and an overview of the app's functionality.
 
 ## Deployed version:
-[Website](https://job-search-app-pertemps.netlify.app/) hosted with Netlify.
+[Website](https://job-search-app-pertemps.netlify.app/) hosted with Netlify. (Recommend viewing on a normal laptop screen)
 
 ## Running the Code Locally:
 This template should help get you started developing with Vue 3 in Vite.
