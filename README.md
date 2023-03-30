@@ -46,6 +46,3 @@ Users can filter job listings by job category. The app displays a list of job ca
 
 ## View Job Details
 When users click on a job listing, they are taken to a job details page. The page displays information about the job, including the job title, salary and job description. Users can also apply for the job by clicking on the apply button, which returns an alert box.
-
-## Disclaimer
-The view button (job detail feature) is working but sometimes it gets stuck for some reason, so you might need to refresh the page and try again a couple of times.
