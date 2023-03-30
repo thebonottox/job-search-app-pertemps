@@ -117,9 +117,9 @@
             </p>
             <div class="text-center">
               <button
-                class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-1 px-4 w-5/6 mt-6 mx-auto rounded-xl"
+                class="bg-blue-900 hover:bg-blue-700 text-white font-bold w-5/6 mt-6 mx-auto rounded-xl"
               >
-                <router-link :to="{ name: 'JobDetail', params: { id: job.id } }"
+                <router-link :to="{ name: 'JobDetail', params: { id: job.id } }" class= "block w-auto py-2 px-4"
                   >View</router-link
                 >
               </button>
