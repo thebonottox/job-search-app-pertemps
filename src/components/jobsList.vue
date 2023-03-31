@@ -45,10 +45,11 @@
             Jobs Found
           </p>
           <button
-            @click="selectedCategories = []"
-            class="bg-blue-200 rounded-lg text-gray-700 p-1 mb-2"
+            @click="selectedCategories = []; searchTerm = ''; sortType = 'default'"
+           
+            class="bg-blue-200 rounded-lg text-gray-700 px-4 py-1 mb-2"
           >
-            Reset Filter
+            Reset
           </button>
           <div class="flex flex-col p-1">
             <label>
