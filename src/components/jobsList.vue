@@ -51,41 +51,61 @@
             Reset Filter
           </button>
           <div class="flex flex-col p-1">
-           <label>
-  <input type="checkbox" v-model="selectedCategories" value="Education" />
-  Education
-  <span class="checkmark"></span>
-</label>
-<label>
-  <input type="checkbox" v-model="selectedCategories" value="Engineering" />
-  Engineering
-  <span class="checkmark"></span>
-</label>
-<label>
-  <input type="checkbox" v-model="selectedCategories" value="Finance" />
-  Finance
-  <span class="checkmark"></span>
-</label>
-<label>
-  <input type="checkbox" v-model="selectedCategories" value="HR" />
-  HR
-  <span class="checkmark"></span>
-</label>
-<label>
-  <input type="checkbox" v-model="selectedCategories" value="Insurance" />
-  Insurance
-  <span class="checkmark"></span>
-</label>
-<label>
-  <input type="checkbox" v-model="selectedCategories" value="IT" />
-  IT
-  <span class="checkmark"></span>
-</label>
-<label>
-  <input type="checkbox" v-model="selectedCategories" value="Warehouse" />
-  Warehouse
-  <span class="checkmark"></span>
-</label>
+            <label>
+              <input
+                type="checkbox"
+                v-model="selectedCategories"
+                value="Education"
+              />
+              Education
+              <span class="checkmark"></span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                v-model="selectedCategories"
+                value="Engineering"
+              />
+              Engineering
+              <span class="checkmark"></span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                v-model="selectedCategories"
+                value="Finance"
+              />
+              Finance
+              <span class="checkmark"></span>
+            </label>
+            <label>
+              <input type="checkbox" v-model="selectedCategories" value="HR" />
+              HR
+              <span class="checkmark"></span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                v-model="selectedCategories"
+                value="Insurance"
+              />
+              Insurance
+              <span class="checkmark"></span>
+            </label>
+            <label>
+              <input type="checkbox" v-model="selectedCategories" value="IT" />
+              IT
+              <span class="checkmark"></span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                v-model="selectedCategories"
+                value="Warehouse"
+              />
+              Warehouse
+              <span class="checkmark"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -112,14 +132,14 @@
             >
               {{ job.category }}
             </button>
-            <p class="text-gray-500 text-sm mt-4">
-              Posted on {{ job.posted_date }}
-            </p>
+            <p class="text-gray-500 text-sm mt-4">Posted {{ Math.floor((Date.now() - new Date (job.posted_date)) / (1000 * 60 * 60 * 24)) }} days ago</p>
             <div class="text-center">
               <button
                 class="bg-blue-900 hover:bg-blue-700 text-white font-bold w-5/6 mt-6 mx-auto rounded-xl"
               >
-                <router-link :to="{ name: 'JobDetail', params: { id: job.id } }" class= "block w-auto py-2 px-4"
+                <router-link
+                  :to="{ name: 'JobDetail', params: { id: job.id } }"
+                  class="block w-auto py-2 px-4"
                   >View</router-link
                 >
               </button>
@@ -146,6 +166,7 @@ export default {
       searchResults: jobData.jobs,
       sortType: "default",
       selectedCategories: [],
+      jobPosted: '2022/11/01'
     };
   },
 
@@ -189,6 +210,13 @@ export default {
   computed: {
     filteredJobs() {
       return this.searchResults;
+    },
+    daysAgo() {
+      const oneDay = 24 * 60 * 60 * 1000; // Hours * minutes * seconds * milliseconds      
+      const jobDate = new Date(this.jobPosted);     
+      const currentDate = new Date();
+      const diffDays = Math.round(Math.abs((currentDate - jobDate) / oneDay));
+      return diffDays;
     },
   },
 };

@@ -13,7 +13,7 @@
       <p class="text-gray-700 mb-2">
         £{{ job.salary_from }} - £{{ job.salary_to }}
       </p>
-      <p class="text-gray-500 text-md">Posted on {{ job.posted_date }}</p>
+      <p class="text-gray-500 text-md">Posted {{ Math.floor((Date.now() - new Date (job.posted_date)) / (1000 * 60 * 60 * 24)) }} days ago</p>
     </div>
     <section class="bg-gray-100 p-8 w-2/3 mx-auto mt-6 rounded-lg shadow-xl">
       <h3 class="text-xl font-bold mb-2">Job Details</h3>
