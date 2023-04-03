@@ -4,8 +4,11 @@
 <div class="absolute top-0 left-0 w-full h-64 flex items-center justify-center">
       <h1 class="text-white text-4xl font-bold">Job Details</h1>
     </div>
+    <div class=" mt-4 ml-2 p-2">
+      <router-link class="text-gray-600 bg-gray-100 font-bold py-2 px-4 border-2 shadow-lg border-none rounded-lg" to="/">Back</router-link>
+    </div>
 </div>
-  <div class="flex flex-col items-center h-screen">
+  <div class="flex flex-col items-center h-screen mt-8">
     <div class="bg-gray-100 p-8 w-2/3 mx-auto mt-8 rounded-lg shadow-xl">
       <h2 class="text-xl font-bold mb-2">{{ job.job_title }}</h2>
       <p class="text-gray-700">ID: {{ job.id }}</p>
